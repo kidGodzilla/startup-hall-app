@@ -8,78 +8,10 @@
 <body class="login fade-in" style="background: #334">
 
 <style>
-    #auth, #login, #register, #reset_password, #member, #member_index, #receptionist, #contact_member_link {
+    #auth, #login, #register, #reset_password, #member, #member_index, #receptionist, nav {
         display: none;
     }
 </style>
-
-<!-- Auth View -->
-<div id="auth" class="form-signin">
-    <img src="images/man-at-pc.png" style="height: 100px;position: absolute;top: 19px;margin-left: -11px">
-    <div class="text-center position-relative cursor-pointer" onclick="window.location.href=&quot;/&quot;">
-        <h3 style="font-family:&#39;Comfortaa&#39;,sans-serif;margin-left:-5px">
-            App
-        </h3>
-    </div>
-    <hr>
-    <div class="tab-content">
-
-        <!-- Login View -->
-        <div id="login" class="tab-pane">
-            <form id="login_form" role="form" method="post" action="" autocomplete="off">
-                <p class="text-muted text-center">
-                    Login
-                </p>
-                <input type="email" name="email" placeholder="email" class="form-control top mtm">
-                <input type="password" name="password" placeholder="password" class="form-control bottom mtm">
-
-                <input id="log_in" type="submit" name="submit" class="btn btn-lg btn-primary btn-block" value="Sign In">
-            </form>
-        </div>
-        <!-- End login view -->
-
-        <!-- Register view -->
-        <div id="register" class="tab-pane">
-            <form id="register_form" role="form" method="post" action="" autocomplete="off">
-                <p class="text-muted text-center">
-                    Create an Account
-                </p>
-                <input type="text" name="name" placeholder="your name" class="form-control top">
-                <input type="email" name="email" placeholder="email" class="form-control top mtm">
-                <input type="password" name="password" placeholder="password" class="form-control bottom mtm">
-                <input type="password" name="password2" placeholder="password (again)" class="form-control bottom mtm">
-
-                <input id="create_account" type="submit" name="submit" class="btn btn-lg btn-primary btn-block" value="Sign Up">
-            </form>
-        </div>
-        <!-- End register view -->
-
-        <!-- Reset password view -->
-        <div id="reset_password" class="tab-pane">
-            <form id="reset_password_form" role="form" method="post" action="" autocomplete="off">
-                <p class="text-muted text-center">
-                    Reset your password
-                </p>
-                <input type="email" name="email" placeholder="email" class="form-control top mtm">
-
-                <input id="reset_pass" type="submit" name="submit" class="btn btn-lg btn-primary btn-block mtm" value="Reset Password">
-            </form>
-        </div>
-        <!-- End reset password view -->
-
-    </div>
-    <hr>
-    <div class="text-center">
-        <ul class="list-inline">
-            <li> <a class="text-muted cursor-pointer" onclick="App.transitionTo('login')">Sign In</a>  </li>
-            <li> <a class="text-muted cursor-pointer" onclick="App.resetPassword()">Forgot Password</a>  </li>
-            <li> <a class="text-muted cursor-pointer" onclick="App.transitionTo('register')">Register</a>  </li>
-        </ul>
-    </div>
-</div>
-<!-- End Auth View -->
-
-
 
 <div id="main" class="container">
     <div class="bg-white">
@@ -156,7 +88,7 @@
                         <div class="form-group">
                             <label class="col-lg-2 control-label"></label>
                             <div class="col-lg-10">
-                                <button class="btn btn-primary pull-right" onclick="App.sendNotification()">Send Notification</button>
+                                <button class="btn btn-primary pull-right">Send Notification</button>
                             </div>
                         </div>
 
@@ -171,6 +103,74 @@
     </div>
     <!-- End receptionist view -->
 </div>
+
+
+
+<!-- Auth View -->
+<div id="auth" class="form-signin">
+    <img src="images/man-at-pc.png" style="height: 100px;position: absolute;top: 19px;margin-left: -11px">
+    <div class="text-center position-relative cursor-pointer" onclick="window.location.href=&quot;/&quot;">
+        <h3 style="font-family:&#39;Comfortaa&#39;,sans-serif;margin-left:-5px">
+            App
+        </h3>
+    </div>
+    <hr>
+    <div class="tab-content">
+
+        <!-- Login View -->
+        <div id="login" class="tab-pane">
+            <form id="login_form" role="form" method="post" action="" autocomplete="off">
+                <p class="text-muted text-center">
+                    Login
+                </p>
+                <input type="email" name="email" placeholder="email" class="form-control top mtm">
+                <input type="password" name="password" placeholder="password" class="form-control bottom mtm">
+
+                <input id="log_in" type="submit" name="submit" class="btn btn-lg btn-primary btn-block" value="Sign In">
+            </form>
+        </div>
+        <!-- End login view -->
+
+        <!-- Register view -->
+        <div id="register" class="tab-pane">
+            <form id="register_form" role="form" method="post" action="" autocomplete="off">
+                <p class="text-muted text-center">
+                    Create an Account
+                </p>
+                <input type="text" name="name" placeholder="your name" class="form-control top">
+                <input type="email" name="email" placeholder="email" class="form-control top mtm">
+                <input type="password" name="password" placeholder="password" class="form-control bottom mtm">
+                <input type="password" name="password2" placeholder="password (again)" class="form-control bottom mtm">
+
+                <input id="create_account" type="submit" name="submit" class="btn btn-lg btn-primary btn-block" value="Sign Up">
+            </form>
+        </div>
+        <!-- End register view -->
+
+        <!-- Reset password view -->
+        <div id="reset_password" class="tab-pane">
+            <form id="reset_password_form" role="form" method="post" action="" autocomplete="off">
+                <p class="text-muted text-center">
+                    Reset your password
+                </p>
+                <input type="email" name="email" placeholder="email" class="form-control top mtm">
+
+                <input id="reset_pass" type="submit" name="submit" class="btn btn-lg btn-primary btn-block mtm" value="Reset Password">
+            </form>
+        </div>
+        <!-- End reset password view -->
+
+    </div>
+    <hr>
+    <div class="text-center">
+        <ul class="list-inline">
+            <li> <a class="text-muted cursor-pointer" onclick="App.transitionTo('login')">Sign In</a>  </li>
+            <li> <a class="text-muted cursor-pointer" onclick="App.resetPassword()">Forgot Password</a>  </li>
+            <li> <a class="text-muted cursor-pointer" onclick="App.transitionTo('register')">Register</a>  </li>
+        </ul>
+    </div>
+</div>
+<!-- End Auth View -->
 
 </div>
 

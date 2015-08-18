@@ -150,19 +150,26 @@
         $('#send_message [name=message]').val(str + " is waiting for you in the lobby.");
     });
 
-    App.registerGlobal('sendNotification', function () {
+    $('#send_message').submit(function () {
+
+    })
+    $('#send_message').submit(function (e) {
+        e.preventDefault();
 
         // Do stuff
         var memberId = App.get('memberId');
-        var guestName = $('#send_message [name=visitorName]').val;
-        var message = $('#send_message [name=message]').val;
+        var guestName = $('#send_message [name=visitorName]').val();
+        var message = $('#send_message [name=message]').val();
+
+        console.log(memberId, guestName, message);
 
         $.post('http://res.qq.my/notify', {memberId: memberId, guestName: guestName, message: message});
+        //$.post('http://yeti.metabootstrap.com/sendAnEmail', {memberId: memberId, guestName: guestName, message: message});
 
         Messenger().post("Your message was sent!");
 
         // Reset Form
-        $('#send_message [name=autocomplete]').val('');
+        $('#send_message #autocomplete').val('');
         $('#send_message [name=visitorName]').val('');
         $('#send_message [name=message]').val('');
 
