@@ -7,6 +7,13 @@
 </head>
 <body class="login fade-in" style="background: #334">
 
+<style>
+    #auth, #login, #register, #reset_password, #member, #member_index, #receptionist {
+        display: none;
+    }
+</style>
+
+<!-- Auth View -->
 <div id="auth" class="form-signin">
     <img src="images/man-at-pc.png" style="height: 100px;position: absolute;top: 19px;margin-left: -11px">
     <div class="text-center position-relative cursor-pointer" onclick="window.location.href=&quot;/&quot;">
@@ -16,8 +23,9 @@
     </div>
     <hr>
     <div class="tab-content">
-        <div id="login" class="tab-pane">
 
+        <!-- Login View -->
+        <div id="login" class="tab-pane">
             <form id="login_form" role="form" method="post" action="" autocomplete="off">
                 <p class="text-muted text-center">
                     Login
@@ -28,11 +36,13 @@
                 <input id="log_in" type="submit" name="submit" class="btn btn-lg btn-primary btn-block" value="Sign In">
             </form>
         </div>
+        <!-- End login view -->
 
-        <div id="register" class="tab-pane active">
+        <!-- Register view -->
+        <div id="register" class="tab-pane">
             <form id="register_form" role="form" method="post" action="" autocomplete="off">
                 <p class="text-muted text-center">
-                    Choose a password
+                    Create an Account
                 </p>
                 <input type="text" name="name" placeholder="your name" class="form-control top">
                 <input type="email" name="email" placeholder="email" class="form-control top mtm">
@@ -42,7 +52,9 @@
                 <input id="create_account" type="submit" name="submit" class="btn btn-lg btn-primary btn-block" value="Sign Up">
             </form>
         </div>
+        <!-- End register view -->
 
+        <!-- Reset password view -->
         <div id="reset_password" class="tab-pane">
             <form id="reset_password_form" role="form" method="post" action="" autocomplete="off">
                 <p class="text-muted text-center">
@@ -53,6 +65,7 @@
                 <input id="reset_pass" type="submit" name="submit" class="btn btn-lg btn-primary btn-block mtm" value="Reset Password">
             </form>
         </div>
+        <!-- End reset password view -->
 
     </div>
     <hr>
@@ -64,6 +77,54 @@
         </ul>
     </div>
 </div>
+<!-- End Auth View -->
+
+
+<!-- Member view -->
+<div id="member" class="">
+    <div id="member_index" class="">
+        <h3 class="text-white">Member Index</h3>
+    </div>
+</div>
+<!-- End member view -->
+
+<!-- Receptionist view -->
+<div id="receptionist" class="">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h3 class="text-white">
+                    Receptionist View
+                </h3>
+
+                <form id="send_message">
+                    <small class="text-white">Who are you looking for?</small>
+                    <br>
+                    <input type="text" id="autocomplete">
+
+                    <div class="matches text-white"></div>
+
+                    <br>
+
+                    <small class="text-white">Visitor Name</small>
+                    <br>
+                    <input type="text" name="visitorName">
+
+                    <br>
+
+                    <small class="text-white">Message</small>
+                    <br>
+                    <textarea name="message" id="" cols="30" rows="10"></textarea>
+                    <br>
+                    <button class="btn btn-primary">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!-- End receptionist view -->
 
 
 

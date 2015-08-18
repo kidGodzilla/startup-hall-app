@@ -6,9 +6,6 @@
 
     App.registerGlobal('auth', function (data, callback) {
 
-        var email = data.email;
-        var password = data.password;
-
         var authData = App.firebaseRef.getAuth();
 
         if (authData) {
@@ -18,24 +15,28 @@
             App.set('userEmail', authData.password.email);
             if (callback && typeof(callback) === "function") callback(authData);
         } else {
-            App.firebaseRef.authWithPassword({ "email": data.email, "password": data.password
-            }, function (error, authData) {
-                if (error) {
-                    // Todo: Try login again
-                    Messenger().post({
-                        message: "Login Failed! " + error + ' <a href="#" onclick="App.resetPassword()">Reset Password</a>?',
-                        type: 'error',
-                        showCloseButton: true
-                    });
-                } else {
-                    console.log("Authenticated user with uid:", authData.uid);
-                    Messenger().post("Login Successful.");
-                    var userID = authData.uid;
-                    App.set('userID', authData.uid);
-                    App.set('userEmail', authData.password.email);
-                    if (callback && typeof(callback) === "function") callback(authData);
-                }
-            });
+            if (!data) {
+                App.transitionTo('login');
+            } else {
+                App.firebaseRef.authWithPassword({ "email": data.email, "password": data.password
+                }, function (error, authData) {
+                    if (error) {
+                        // Todo: Try login again
+                        Messenger().post({
+                            message: "Login Failed! " + error + ' <a href="#" onclick="App.resetPassword()">Reset Password</a>?',
+                            type: 'error',
+                            showCloseButton: true
+                        });
+                    } else {
+                        console.log("Authenticated user with uid:", authData.uid);
+                        //Messenger().post("Login Successful.");
+                        var userID = authData.uid;
+                        App.set('userID', authData.uid);
+                        App.set('userEmail', authData.password.email);
+                        if (callback && typeof(callback) === "function") callback(authData);
+                    }
+                });
+            }
         }
     });
 
@@ -76,9 +77,11 @@
                     }
                 } else {
                     console.log("Successfully created user account with uid:", userData.uid);
-                    Messenger().post("Your account was created successfully.");
+                    userData.data = {};
+                    userData.data.name = name;
+                    userData.data.email = email;
 
-                    if (callback && typeof(callback) === "function") callback();
+                    if (callback && typeof(callback) === "function") callback(userData);
                 }
             });
         } else {
