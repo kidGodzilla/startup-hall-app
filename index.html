@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Demo</title>
+    <script src="loader.js"></script>
+</head>
+<body class="login fade-in" style="background: #334">
+
+<div id="auth" class="form-signin">
+    <img src="images/man-at-pc.png" style="height: 100px;position: absolute;top: 19px;margin-left: -11px">
+    <div class="text-center position-relative cursor-pointer" onclick="window.location.href=&quot;/&quot;">
+        <h3 style="font-family:&#39;Comfortaa&#39;,sans-serif;margin-left:-5px">
+            App
+        </h3>
+    </div>
+    <hr>
+    <div class="tab-content">
+        <div id="login" class="tab-pane">
+
+            <form id="login_form" role="form" method="post" action="" autocomplete="off">
+                <p class="text-muted text-center">
+                    Login
+                </p>
+                <input type="email" name="email" placeholder="email" class="form-control top mtm">
+                <input type="password" name="password" placeholder="password" class="form-control bottom mtm">
+
+                <input id="log_in" type="submit" name="submit" class="btn btn-lg btn-primary btn-block" value="Sign In">
+            </form>
+        </div>
+
+        <div id="register" class="tab-pane active">
+            <form id="register_form" role="form" method="post" action="" autocomplete="off">
+                <p class="text-muted text-center">
+                    Choose a password
+                </p>
+                <input type="text" name="name" placeholder="your name" class="form-control top">
+                <input type="email" name="email" placeholder="email" class="form-control top mtm">
+                <input type="password" name="password" placeholder="password" class="form-control bottom mtm">
+                <input type="password" name="password2" placeholder="password (again)" class="form-control bottom mtm">
+
+                <input id="create_account" type="submit" name="submit" class="btn btn-lg btn-primary btn-block" value="Sign Up">
+            </form>
+        </div>
+
+        <div id="reset_password" class="tab-pane">
+            <form id="reset_password_form" role="form" method="post" action="" autocomplete="off">
+                <p class="text-muted text-center">
+                    Reset your password
+                </p>
+                <input type="email" name="email" placeholder="email" class="form-control top mtm">
+
+                <input id="reset_pass" type="submit" name="submit" class="btn btn-lg btn-primary btn-block mtm" value="Reset Password">
+            </form>
+        </div>
+
+    </div>
+    <hr>
+    <div class="text-center">
+        <ul class="list-inline">
+            <li> <a class="text-muted" onclick="App.transitionTo('login')">Sign In</a>  </li>
+            <!--<li> <a class="text-muted" onclick="App.transitionTo('reset-password')">Forgot Password</a>  </li>-->
+            <li> <a class="text-muted" onclick="App.transitionTo('register')">Register</a>  </li>
+        </ul>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+    <!-- Init core -->
+    <script src="init.js"></script>
+
+    <!-- Services -->
+    <script src="auth.js"></script>
+    <script src="router.js"></script>
+
+    <!-- Application -->
+    <script src="app.js"></script>
+</body>
+</html>
