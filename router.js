@@ -44,7 +44,12 @@
             // Load member page
             case "member-index":
                 // Do stuff
-                $("#reset_password").show();
+                $("#member, #member_index").show();
+                break;
+            // Load receptionist page
+            case "receptionist":
+                // Do stuff
+                $("#receptionist").show();
                 break;
 
         }
@@ -76,7 +81,12 @@
             // Unload member page
             case "member-index":
                 // Do stuff
-                $("#reset_password").hide();
+                $("#member, #member_index").hide();
+                break;
+            // Unload member page
+            case "receptionist":
+                // Do stuff
+                $("#receptionist").hide();
                 break;
 
         }
