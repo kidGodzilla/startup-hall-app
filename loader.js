@@ -80,7 +80,7 @@
          * A lightweight, beautiful notification library
          */
         loadStylesheet(protocol + "cdnjs.cloudflare.com/ajax/libs/messenger/1.4.0/css/messenger.css");
-        loadStylesheet(protocol + "cdnjs.cloudflare.com/ajax/libs/messenger/1.4.0/css/messenger-theme-air.css");
+        loadStylesheet("css/messenger-theme-air.css");
         loadScript(protocol + "cdnjs.cloudflare.com/ajax/libs/messenger/1.4.0/js/messenger.min.js");
         document.write("<script>Messenger.options = { extraClasses: 'messenger-fixed messenger-on-top messenger-on-right', theme: 'air'};</script>");
 
@@ -126,7 +126,7 @@
 
         loadStylesheet("css/meta-bootstrap.css");
         loadStylesheet("css/style.css");
-        loadStylesheet(protocol + "www.metabootstrap.com/admin-template/dist/assets/css/main.min.css");
+        loadStylesheet("css/metabootstrap-admin.css");
 
 
         /**

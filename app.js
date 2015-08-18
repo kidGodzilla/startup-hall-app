@@ -32,7 +32,6 @@
 
         // Normalize object
         for (var property in memberNames) {
-            console.log(memberNames[property].name, memberNames[property].memberID);
             _array.push({
                 name: memberNames[property].name,
                 memberID: memberNames[property].memberID
