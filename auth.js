@@ -110,7 +110,7 @@
                     return true; // Cancelled
                 }
 
-                firebaseRef.resetPassword({
+                App.firebaseRef.resetPassword({
                     email: data.email
                 }, function (error) {
                     if (error) {

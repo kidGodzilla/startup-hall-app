@@ -71,9 +71,9 @@
     <hr>
     <div class="text-center">
         <ul class="list-inline">
-            <li> <a class="text-muted" onclick="App.transitionTo('login')">Sign In</a>  </li>
-            <!--<li> <a class="text-muted" onclick="App.transitionTo('reset-password')">Forgot Password</a>  </li>-->
-            <li> <a class="text-muted" onclick="App.transitionTo('register')">Register</a>  </li>
+            <li> <a class="text-muted cursor-pointer" onclick="App.transitionTo('login')">Sign In</a>  </li>
+            <li> <a class="text-muted cursor-pointer" onclick="App.resetPassword()">Forgot Password</a>  </li>
+            <li> <a class="text-muted cursor-pointer" onclick="App.transitionTo('register')">Register</a>  </li>
         </ul>
     </div>
 </div>
@@ -110,6 +110,7 @@
                     <br>
                     <input type="text" name="visitorName">
 
+                    <br>
                     <br>
 
                     <small class="text-white">Message</small>

@@ -89,9 +89,9 @@
          * Hubspot Vex
          * A lightweight, beautiful message window library, vex is a drop-in replacement for alert, confirm, and more.
          */
-        loadStylesheet("http://wpages.co/old/wpce/vex.css");
-        loadStylesheet("http://wpages.co/old/wpce/vex-theme-default.css");
-        loadScript("http://wpages.co/old/wpce/vex.combined.min.js");
+        loadStylesheet("css/vex.css");
+        loadStylesheet("css/vex-theme-default.css");
+        loadScript("js/vex.combined.min.js");
         document.write("<script>vex.defaultOptions.className = 'vex-theme-default';</script>");
 
 
