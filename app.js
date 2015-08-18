@@ -53,9 +53,6 @@
             console.log('registered, I think!');
             Messenger().post("Your account was created successfully.");
 
-            // authData.uid
-            // authData.password.email
-
             console.log(userData);
             var newPostRef = App.firebaseRef.child('members').push({
                 name: userData.data.name,
@@ -70,19 +67,19 @@
             });
 
             App.transitionTo('member-index');
-
-
-
         });
     });
+
     $('#login_form').submit(function (e) {
         e.preventDefault();
         App.auth({
             email:     $('#login_form [name=email]').val(),
             password:  $('#login_form [name=password]').val(),
-        }, function () {
-            console.log('authed, I think!');
+        }, function (authData) {
+            console.log('authed, I think!', authData);
             Messenger().post("Logged in successfully.");
+            App.transitionTo('member-index');
+
         });
     });
 
@@ -103,12 +100,6 @@
     /**
      * Receptionist View
      */
-
-    // Receptionist needs an object full of names
-    // [{ "<name>": "<user-id>" }]
-
-
-
     function filteredEmployees(string) {
         var filtered = [];
         var employees = App.get('memberNames');
@@ -130,36 +121,53 @@
     }
 
     function renderMatchedEmployees(matches) {
-        console.log(matches);
         var result = '';
         $.each(matches, function() {
-            result += '<p data-memberID="' + this.memberID + '">' + this.name + '</p>';
+            result += '<p class="cursor-pointer" data-memberID="' + this.memberID + '">' + this.name + '</p>';
         });
         $('#receptionist .matches').html(result);
         $('#receptionist .matches p').off('click').bind('click', function() {
             var match = $(this).html();
-            memberID = $(this).attr('data-memberID');
-            matchName = match;
+            var memberID = $(this).attr('data-memberID');
+            App.set('memberId', memberID);
+
+            var matchName = match;
             $('#autocomplete').val('<' + match + '>');
             $('#receptionist .matches').html('');
             //checkMeetingIsSubmitable();
 
             console.log("Post this data: " + memberID);
-
         });
     }
 
     $('#autocomplete').on('input', function () {
         var str = $('#autocomplete').val();
-        // console.log(str);
         findEmployee(str);
     });
 
     $('#send_message [name=visitorName]').on('input', function () {
         var str = $('#send_message [name=visitorName]').val();
-
         $('#send_message [name=message]').val(str + " is waiting for you in the lobby.");
+    });
 
+    App.registerGlobal('sendNotification', function () {
+
+        // Do stuff
+        var memberId = App.get('memberId');
+        var guestName = $('#send_message [name=visitorName]').val;
+        var message = $('#send_message [name=message]').val;
+
+        $.post('http://res.qq.my/notify', {memberId: memberId, guestName: guestName, message: message});
+
+        Messenger().post("Your message was sent!");
+
+        // Reset Form
+        $('#send_message [name=autocomplete]').val('');
+        $('#send_message [name=visitorName]').val('');
+        $('#send_message [name=message]').val('');
+
+        // Goto index
+        App.transitionTo('member-index');
     });
 
 
@@ -171,6 +179,20 @@
 
         // Initially dump users on the member index
         if (!window.location.hash) App.transitionTo('member-index');
+
+        console.log(authData.uid);
+
+        var uid = authData.uid.replace(/[a-zA-Z0-9]]/g,'');
+
+        // Show more options if this is a receptionist
+        App.firebaseRef.child("memberRoles/"+uid).on("value", function(snapshot) {
+            var data = snapshot.val();
+
+            if (data && data === "receptionist") {
+                $('#contact_member_link').show();
+            }
+        });
+
     });
 
 
@@ -179,8 +201,6 @@
      */
     window.onhashchange = transitionOnHashchange;
     transitionOnHashchange();
-
-
 
 
 })();

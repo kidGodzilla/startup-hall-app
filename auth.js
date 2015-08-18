@@ -136,5 +136,10 @@
             }
         });
     });
+
+    App.registerGlobal('logout', function () {
+        App.firebaseRef.unauth();
+        App.transitionTo('login');
+    });
 })();
 

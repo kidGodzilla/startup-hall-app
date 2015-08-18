@@ -44,12 +44,12 @@
             // Load member page
             case "member-index":
                 // Do stuff
-                $("#member, #member_index").show();
+                $("#main, #member, #member_index").show();
                 break;
             // Load receptionist page
             case "receptionist":
                 // Do stuff
-                $("#receptionist").show();
+                $("#main, #receptionist").show();
                 break;
 
         }
@@ -81,12 +81,12 @@
             // Unload member page
             case "member-index":
                 // Do stuff
-                $("#member, #member_index").hide();
+                $("#main, #member, #member_index").hide();
                 break;
             // Unload member page
             case "receptionist":
                 // Do stuff
-                $("#receptionist").hide();
+                $("#main, #receptionist").hide();
                 break;
 
         }
