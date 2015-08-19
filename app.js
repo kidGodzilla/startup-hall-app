@@ -1,47 +1,11 @@
+/**
+ * Startup Hall App
+ */
 (function () {
-    /**
-     * Startup Hall App
-     */
-
-    var firebaseRef = new Firebase("https://startuphall.firebaseio.com");
-    App.registerGlobal('firebaseRef', firebaseRef);
-
 
     /**
-     * Get all ORGs & store them in orgs
+     * Handle registration form submissions
      */
-    App.firebaseRef.child("organizations").on("value", function(snapshot) {
-        var orgs = snapshot.val();
-        App.set('organizations', orgs);
-    });
-
-    /**
-     * Get all ORGs & store them in orgs
-     */
-    App.firebaseRef.child("organizations").on("value", function(snapshot) {
-        var orgs = snapshot.val();
-        App.set('organizations', orgs);
-    });
-
-    /**
-     * Get memberNames
-     */
-    App.firebaseRef.child("memberNames").on("value", function(snapshot) {
-        var memberNames = snapshot.val();
-        var _array = [];
-
-        // Normalize object
-        for (var property in memberNames) {
-            _array.push({
-                name: memberNames[property].name,
-                memberID: memberNames[property].memberID
-            })
-        }
-
-        App.set('memberNames', _array);
-    });
-
-
     $('#register_form').submit(function (e) {
         e.preventDefault();
         App.createAccount({
@@ -70,6 +34,9 @@
         });
     });
 
+    /**
+     * Handle login form submissions
+     */
     $('#login_form').submit(function (e) {
         e.preventDefault();
         App.auth({
@@ -84,23 +51,14 @@
     });
 
 
-    /**
-     * Route to a location based on hash
-     */
-    function transitionOnHashchange () {
-        if (window.location.hash === "#receptionist") {
-            App.transitionTo('receptionist');
-        }
-        if (window.location.hash === "#register") {
-            App.transitionTo('register');
-        }
-    }
-
+/****************************************************
+* Receptionist View
+***************************************************/
 
     /**
-     * Receptionist View
+     * Filter a members object to contiguous string in string
      */
-    function filteredEmployees(string) {
+    function filteredMembers (string) {
         var filtered = [];
         var employees = App.get('memberNames');
 
@@ -113,14 +71,20 @@
         return filtered;
     }
 
-    function findEmployee(name) {
+    /**
+     * Find a members object based on input & render it
+     */
+    function findMember (name) {
         if (name.length) {
-            var matches = filteredEmployees(name);
-            renderMatchedEmployees(matches);
+            var matches = filteredMembers(name);
+            renderMatchedMembers(matches);
         }
     }
 
-    function renderMatchedEmployees(matches) {
+    /**
+     * Render an array of potential match objects
+     */
+    function renderMatchedMembers (matches) {
         var result = '';
         $.each(matches, function() {
             result += '<p class="cursor-pointer" data-memberID="' + this.memberID + '">' + this.name + '</p>';
@@ -140,23 +104,29 @@
         });
     }
 
+    /**
+     * When the autocomplete field is modified, render a list of members
+     */
     $('#autocomplete').on('input', function () {
         var str = $('#autocomplete').val();
-        findEmployee(str);
+        findMember(str);
     });
 
+    /**
+     * When a visitorName is changed, prefill the message form
+     */
     $('#send_message [name=visitorName]').on('input', function () {
         var str = $('#send_message [name=visitorName]').val();
         $('#send_message [name=message]').val(str + " is waiting for you in the lobby.");
     });
 
-    $('#send_message').submit(function () {
-
-    })
+    /**
+     * When the receptionist submits the form, send a notification
+     */
     $('#send_message').submit(function (e) {
+
         e.preventDefault();
 
-        // Do stuff
         var memberId = App.get('memberId');
         var guestName = $('#send_message [name=visitorName]').val();
         var message = $('#send_message [name=message]').val();
@@ -164,7 +134,6 @@
         console.log(memberId, guestName, message);
 
         $.post('http://res.qq.my/notify', {memberId: memberId, guestName: guestName, message: message});
-        //$.post('http://yeti.metabootstrap.com/sendAnEmail', {memberId: memberId, guestName: guestName, message: message});
 
         Messenger().post("Your message was sent!");
 
@@ -178,9 +147,8 @@
     });
 
 
-
     /**
-     * Try to authenticate, redirect to the member-index if successful
+     * Try to authenticate on page load, redirect to the member-index if successful
      */
     App.auth(null, function (authData) {
 
@@ -202,6 +170,18 @@
 
     });
 
+
+    /**
+     * Route to a location based on hash
+     */
+    function transitionOnHashchange () {
+        if (window.location.hash === "#receptionist") {
+            App.transitionTo('receptionist');
+        }
+        if (window.location.hash === "#register") {
+            App.transitionTo('register');
+        }
+    }
 
     /**
      * Handle hashchange events & initially route to a specific route on if a hash is applied
